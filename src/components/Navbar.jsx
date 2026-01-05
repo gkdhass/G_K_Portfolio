@@ -30,9 +30,9 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -80, opacity: 0 }}
+      initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.9, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-portfolio-bg-secondary/90 backdrop-blur-md shadow-lg"
@@ -40,78 +40,78 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 md:h-20">
 
-          {/* 🔥 LOGO IMAGE + TEXT */}
+          {/* 🔥 LOGO (RESPONSIVE) */}
           <motion.div
-            className="flex items-center gap-4 cursor-pointer"
+            className="flex items-center gap-3 cursor-pointer"
             initial="hidden"
             animate="visible"
             variants={{
-              visible: { transition: { staggerChildren: 0.15 } },
+              visible: { transition: { staggerChildren: 0.12 } },
             }}
           >
-            {/* Logo Image with Shadow */}
+            {/* Logo Image */}
             <motion.img
               src={logo}
               alt="Logo"
-              className="h-16 w-16 object-contain drop-shadow-xl"
+              className="
+                h-12 w-12
+                md:h-14 md:w-14
+                lg:h-16 lg:w-16
+                object-contain
+              "
               variants={{
-                hidden: { opacity: 0, scale: 0.6, rotate: -15 },
+                hidden: { opacity: 0, scale: 0.8 },
                 visible: {
                   opacity: 1,
                   scale: 1,
-                  rotate: 0,
-                  transition: {
-                    duration: 0.8,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  },
+                  transition: { duration: 0.6 },
                 },
               }}
-              whileHover={{
-                scale: 1.12,
-                rotate: 2,
-                filter: "drop-shadow(0 0 18px rgba(250,161,20,0.8))",
-              }}
+              whileHover={{ scale: 1.08 }}
             />
 
-            {/* Logo Text with Shadow */}
+            {/* Logo Text */}
             <motion.span
-              className="text-2xl font-bold text-portfolio-highlight"
+              className="
+                font-bold text-portfolio-highlight
+                text-lg
+                md:text-xl
+                lg:text-2xl
+              "
               style={{
                 textShadow:
-                  "0 2px 8px rgba(0,0,0,0.6), 0 0 14px rgba(250,161,20,0.5)",
+                  "0 2px 8px rgba(0,0,0,0.6), 0 0 12px rgba(250,161,20,0.4)",
               }}
               variants={{
-                hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+                hidden: { opacity: 0, y: 8 },
                 visible: {
                   opacity: 1,
                   y: 0,
-                  filter: "blur(0px)",
-                  transition: { duration: 0.7 },
+                  transition: { duration: 0.5 },
                 },
-              }}
-              whileHover={{
-                scale: 1.05,
-                textShadow:
-                  "0 4px 12px rgba(0,0,0,0.8), 0 0 20px rgba(250,161,20,0.8)",
               }}
             >
               Mohan<span className="text-white">Dhass</span>
             </motion.span>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          {/* DESKTOP + TABLET MENU */}
+          <div className="hidden md:flex space-x-6 lg:space-x-8">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollToSection(e, link.href)}
-                initial={{ opacity: 0, y: -16 }}
+                initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="relative text-portfolio-muted hover:text-portfolio-highlight transition-colors duration-300 group"
+                transition={{ delay: index * 0.08 }}
+                className="
+                  relative text-portfolio-muted
+                  hover:text-portfolio-highlight
+                  transition-colors duration-300 group
+                "
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-portfolio-highlight transition-all duration-300 group-hover:w-full"></span>
@@ -119,35 +119,42 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Mobile Button */}
+          {/* MOBILE MENU BUTTON */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-portfolio-highlight"
             >
-              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU */}
       <motion.div
         initial={false}
-        animate={{
-          height: isMobileMenuOpen ? "auto" : 0,
-          opacity: isMobileMenuOpen ? 1 : 0,
-        }}
-        transition={{ duration: 0.35, ease: "easeInOut" }}
+        animate={
+          isMobileMenuOpen
+            ? { height: "auto", opacity: 1 }
+            : { height: 0, opacity: 0 }
+        }
+        transition={{ duration: 0.3, ease: "easeInOut" }}
         className="md:hidden overflow-hidden bg-portfolio-bg-secondary"
       >
-        <div className="px-4 py-4 space-y-2">
+        <div className="px-4 py-3 space-y-2">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={(e) => scrollToSection(e, link.href)}
-              className="block rounded-md px-3 py-2 text-portfolio-muted hover:text-portfolio-highlight hover:bg-portfolio-card transition-all duration-300"
+              className="
+                block rounded-md px-3 py-2
+                text-portfolio-muted
+                hover:text-portfolio-highlight
+                hover:bg-portfolio-card
+                transition-all duration-300
+              "
             >
               {link.name}
             </a>

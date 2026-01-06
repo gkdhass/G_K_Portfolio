@@ -71,7 +71,7 @@ const Hero = () => {
                  px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           {/* ================= IMAGE FIRST (Mobile & Tablet) ================= */}
           <div className="flex justify-center order-1 lg:order-2">
@@ -87,10 +87,16 @@ const Hero = () => {
               className="relative"
             >
               {/* Neon Shadow */}
-              <div className="absolute inset-0 rounded-full blur-2xl bg-portfolio-highlight/30 scale-105 -z-10" />
+              <div className="absolute inset-0 rounded-full blur-3xl bg-portfolio-highlight/35 scale-110 -z-10" />
 
-              {/* Image */}
-              <div className="w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden">
+              {/* BIGGER IMAGE */}
+              <div className="
+                w-64 h-64
+                sm:w-72 sm:h-72
+                md:w-80 md:h-80
+                lg:w-[26rem] lg:h-[26rem]
+                rounded-full overflow-hidden
+              ">
                 <img
                   src={Profile}
                   alt="Mohan Dhass G"

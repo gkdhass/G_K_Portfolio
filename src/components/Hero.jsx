@@ -2,35 +2,37 @@ import React from 'react'
 import {
   motion,
   useMotionValue,
-  useTransform
+  useTransform,
 } from 'framer-motion'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { FaXTwitter } from 'react-icons/fa6'
 import Profile from '../assets/profile.jpg'
 
 const Hero = () => {
-
   /* ================= CONTACT SCROLL ================= */
   const scrollToContact = () => {
     const section = document.getElementById('contact')
     section?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  /* ================= 3D PARALLAX ================= */
+  /* ================= 3D PARALLAX (DESKTOP ONLY) ================= */
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
   const rotateX = useTransform(y, [-50, 50], [8, -8])
   const rotateY = useTransform(x, [-50, 50], [-8, 8])
 
+  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024
+
   const handleMouseMove = (e) => {
-    if (window.innerWidth < 1024) return
+    if (!isDesktop) return
     const rect = e.currentTarget.getBoundingClientRect()
     x.set(e.clientX - rect.left - rect.width / 2)
     y.set(e.clientY - rect.top - rect.height / 2)
   }
 
   const resetTilt = () => {
+    if (!isDesktop) return
     x.set(0)
     y.set(0)
   }
@@ -40,10 +42,7 @@ const Hero = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.35,
-        delayChildren: 0.6,
-      },
+      transition: { staggerChildren: 0.35, delayChildren: 0.6 },
     },
   }
 
@@ -66,37 +65,46 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center
-                 pt-20 pb-32 md:pb-40 lg:pb-48
-                 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen flex items-center justify-center pt-20 pb-32 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* ================= IMAGE FIRST (Mobile & Tablet) ================= */}
+          {/* ================= IMAGE ================= */}
           <div className="flex justify-center order-1 lg:order-2">
             <motion.div
               onMouseMove={handleMouseMove}
               onMouseLeave={resetTilt}
               style={{
-                rotateX,
-                rotateY,
+                rotateX: isDesktop ? rotateX : 0,
+                rotateY: isDesktop ? rotateY : 0,
                 transformStyle: 'preserve-3d',
               }}
+              whileHover={isDesktop ? { scale: 1.04 } : {}}
               transition={{ type: 'spring', stiffness: 50, damping: 22 }}
-              className="relative"
+              className="relative group"
             >
-              {/* Neon Shadow */}
-              <div className="absolute inset-0 rounded-full blur-3xl bg-portfolio-highlight/35 scale-110 -z-10" />
+              {/* SHADOW */}
+              <div
+                className="
+                  absolute inset-0 rounded-full blur-3xl scale-110 -z-10
+                  bg-portfolio-highlight/40
+                  opacity-100
+                  lg:opacity-0 lg:group-hover:opacity-100
+                  transition-opacity duration-500
+                "
+              />
 
-              {/* BIGGER IMAGE */}
-              <div className="
-                w-64 h-64
-                sm:w-72 sm:h-72
-                md:w-80 md:h-80
-                lg:w-[26rem] lg:h-[26rem]
-                rounded-full overflow-hidden
-              ">
+              {/* IMAGE */}
+              <div
+                className="
+                  w-64 h-64
+                  sm:w-72 sm:h-72
+                  md:w-80 md:h-80
+                  lg:w-[26rem] lg:h-[26rem]
+                  rounded-full overflow-hidden
+                "
+              >
                 <img
                   src={Profile}
                   alt="Mohan Dhass G"
@@ -106,7 +114,7 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* ================= TEXT SECOND (Mobile & Tablet) ================= */}
+          {/* ================= TEXT ================= */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -122,7 +130,6 @@ const Hero = () => {
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gradient mb-4"
                 animate={{ y: [0, -4, 0] }}
                 transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ textShadow: '0 8px 32px rgba(204,208,207,0.35)' }}
               >
                 Mohan Dhass G
               </motion.h1>
@@ -138,11 +145,10 @@ const Hero = () => {
 
             <motion.p
               variants={itemVariants}
-              className="text-portfolio-muted text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0"
+              className="text-portfolio-muted text-base sm:text-lg max-w-xl mx-auto lg:mx-0"
             >
               Crafting elegant solutions with modern web technologies.
-              Passionate about building scalable applications and delivering
-              exceptional user experiences.
+              Passionate about building scalable applications and delightful user experiences.
             </motion.p>
 
             {/* BUTTONS */}
@@ -150,19 +156,19 @@ const Hero = () => {
               variants={itemVariants}
               className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start"
             >
-              <motion.a
+              <a
                 href="#contact"
                 className="px-7 py-3 bg-portfolio-highlight text-portfolio-bg-main font-semibold rounded-lg"
               >
                 Hire Me
-              </motion.a>
+              </a>
 
-              <motion.a
+              <a
                 href="#projects"
                 className="px-7 py-3 border-2 border-portfolio-highlight text-portfolio-highlight font-semibold rounded-lg hover:bg-portfolio-highlight hover:text-portfolio-bg-main"
               >
                 See Projects
-              </motion.a>
+              </a>
             </motion.div>
 
             {/* SOCIAL ICONS */}

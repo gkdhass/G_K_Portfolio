@@ -23,7 +23,7 @@ const Certifications = () => {
     },
     {
       title: 'Intership 6.0 on MERN Stack Development',
-      issuer: 'Infosys',
+      issuer: 'Infosys Springboard',
       date: 'September-November 2025',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0tzQe2wAA9Dt_ixEGMDTKYEUmC9Riw1I7fQ&s',
       credentialUrl: 'https://drive.google.com/file/d/1Qvk7x--o6mBq1jjiJM6Rets0xgd5eZuz/view?usp=sharing',

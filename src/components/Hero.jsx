@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-} from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { FaXTwitter } from 'react-icons/fa6'
 import Profile from '../assets/profile.jpg'
@@ -13,28 +9,6 @@ const Hero = () => {
   const scrollToContact = () => {
     const section = document.getElementById('contact')
     section?.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  /* ================= 3D PARALLAX (DESKTOP ONLY) ================= */
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-
-  const rotateX = useTransform(y, [-50, 50], [8, -8])
-  const rotateY = useTransform(x, [-50, 50], [-8, 8])
-
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024
-
-  const handleMouseMove = (e) => {
-    if (!isDesktop) return
-    const rect = e.currentTarget.getBoundingClientRect()
-    x.set(e.clientX - rect.left - rect.width / 2)
-    y.set(e.clientY - rect.top - rect.height / 2)
-  }
-
-  const resetTilt = () => {
-    if (!isDesktop) return
-    x.set(0)
-    y.set(0)
   }
 
   /* ================= ANIMATIONS ================= */
@@ -73,36 +47,30 @@ const Hero = () => {
           {/* ================= IMAGE ================= */}
           <div className="flex justify-center order-1 lg:order-2">
             <motion.div
-              onMouseMove={handleMouseMove}
-              onMouseLeave={resetTilt}
-              style={{
-                rotateX: isDesktop ? rotateX : 0,
-                rotateY: isDesktop ? rotateY : 0,
-                transformStyle: 'preserve-3d',
-              }}
-              whileHover={isDesktop ? { scale: 1.04 } : {}}
-              transition={{ type: 'spring', stiffness: 50, damping: 22 }}
-              className="relative group"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+              className="relative"
             >
-              {/* SHADOW */}
+              {/* GLOW SHADOW */}
               <div
                 className="
-                  absolute inset-0 rounded-full blur-3xl scale-110 -z-10
+                  absolute inset-0 rounded-full
+                  blur-[90px] scale-125
                   bg-portfolio-highlight/40
-                  opacity-100
-                  lg:opacity-0 lg:group-hover:opacity-100
-                  transition-opacity duration-500
+                  -z-10
                 "
               />
 
               {/* IMAGE */}
               <div
                 className="
-                  w-64 h-64
-                  sm:w-72 sm:h-72
-                  md:w-80 md:h-80
-                  lg:w-[26rem] lg:h-[26rem]
+                  w-72 h-72
+                  sm:w-80 sm:h-80
+                  md:w-96 md:h-96
+                  lg:w-[30rem] lg:h-[30rem]
                   rounded-full overflow-hidden
+                  shadow-[0_40px_100px_rgba(0,0,0,0.6)]
+                  border border-portfolio-highlight/30
                 "
               >
                 <img

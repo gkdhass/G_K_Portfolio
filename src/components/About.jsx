@@ -1,61 +1,12 @@
-import React, { useRef, useEffect, useState } from 'react'
-import {
-  motion,
-  useInView,
-  useMotionValue,
-  useTransform,
-  useReducedMotion,
-} from 'framer-motion'
+import React, { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { Code2, Rocket, Users } from 'lucide-react'
 import Photo from '../assets/profile.jpg'
 import CV from '../assets/Mohandhass.pdf'
 
-/* ================= DEVICE DETECTION ================= */
-const useDevice = () => {
-  const [device, setDevice] = useState('desktop')
-
-  useEffect(() => {
-    const update = () => {
-      if (window.innerWidth < 640) setDevice('mobile')
-      else if (window.innerWidth < 1024) setDevice('tablet')
-      else setDevice('desktop')
-    }
-    update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
-  }, [])
-
-  return device
-}
-
 const About = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
-  const device = useDevice()
-  const reducedMotion = useReducedMotion()
-
-  const enable3D = device === 'desktop' && !reducedMotion
-  const tablet3D = device === 'tablet' && !reducedMotion
-
-  /* ================= 3D PARALLAX ================= */
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-
-  const depth = enable3D ? 14 : tablet3D ? 6 : 0
-  const rotateX = useTransform(y, [-0.5, 0.5], [depth, -depth])
-  const rotateY = useTransform(x, [-0.5, 0.5], [-depth, depth])
-
-  const handleMouseMove = (e) => {
-    if (!enable3D) return
-    const rect = e.currentTarget.getBoundingClientRect()
-    x.set((e.clientX - rect.left) / rect.width - 0.5)
-    y.set((e.clientY - rect.top) / rect.height - 0.5)
-  }
-
-  const reset = () => {
-    x.set(0)
-    y.set(0)
-  }
 
   const features = [
     {
@@ -80,7 +31,6 @@ const About = () => {
       id="about"
       ref={ref}
       className="py-20 px-4 sm:px-6 lg:px-8 bg-portfolio-bg-secondary overflow-hidden"
-      style={{ perspective: enable3D ? '1200px' : 'none' }}
     >
       <div className="max-w-7xl mx-auto">
         {/* ================= HEADING ================= */}
@@ -90,26 +40,15 @@ const About = () => {
           transition={{ duration: 0.9 }}
           className="text-center mb-16"
         >
-          <motion.h2
-            className="text-4xl sm:text-5xl font-bold text-portfolio-highlight mb-4"
-            animate={enable3D ? { y: [-2, 2, -2] } : {}}
-            transition={enable3D ? { duration: 4, repeat: Infinity } : {}}
-          >
+          <h2 className="text-4xl sm:text-5xl font-bold text-portfolio-highlight mb-4">
             About Me
-          </motion.h2>
+          </h2>
           <div className="w-20 h-1 bg-portfolio-highlight mx-auto rounded-full" />
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* ================= IMAGE (3D PARALLAX) ================= */}
+          {/* ================= IMAGE (NO 3D) ================= */}
           <motion.div
-            onMouseMove={handleMouseMove}
-            onMouseLeave={reset}
-            style={{
-              rotateX: enable3D || tablet3D ? rotateX : 0,
-              rotateY: enable3D || tablet3D ? rotateY : 0,
-              transformStyle: 'preserve-3d',
-            }}
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1 }}
@@ -119,9 +58,10 @@ const About = () => {
               <img
                 src={Photo}
                 alt="Profile"
-                className="rounded-xl w-full shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+                className="rounded-xl w-full shadow-[0_25px_70px_rgba(0,0,0,0.6)]"
               />
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-cyan-400/20 to-transparent pointer-events-none" />
+              {/* subtle light overlay */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-cyan-400/15 to-transparent pointer-events-none" />
             </div>
           </motion.div>
 
@@ -150,16 +90,12 @@ const About = () => {
                   initial={{ opacity: 0, y: 24 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.4 + index * 0.15 }}
-                  whileHover={
-                    enable3D
-                      ? { scale: 1.06 }
-                      : tablet3D
-                      ? { scale: 1.03 }
-                      : {}
-                  }
-                  className="bg-portfolio-card p-4 rounded-xl border border-white/10 hover:border-cyan-400/40 transition-all duration-300 shadow-[0_0_30px_rgba(0,255,255,0.08)]"
+                  className="bg-portfolio-card p-4 rounded-xl border border-white/10 shadow-[0_0_30px_rgba(0,255,255,0.08)]"
                 >
-                  <feature.Icon className="text-portfolio-highlight mb-2" size={30} />
+                  <feature.Icon
+                    className="text-portfolio-highlight mb-2"
+                    size={30}
+                  />
                   <h4 className="text-portfolio-highlight font-semibold mb-1">
                     {feature.title}
                   </h4>
@@ -178,9 +114,7 @@ const About = () => {
             >
               <a href={CV} download>
                 <motion.button
-                  whileHover={
-                    enable3D ? { scale: 1.08 } : tablet3D ? { scale: 1.04 } : {}
-                  }
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.96 }}
                   className="px-8 py-3 bg-portfolio-highlight text-portfolio-bg-main font-semibold rounded-lg shadow-[0_0_35px_rgba(0,255,255,0.35)] transition-all"
                 >

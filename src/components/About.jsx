@@ -47,21 +47,23 @@ const About = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* ================= IMAGE (NO 3D) ================= */}
+          {/* ================= IMAGE (20% CURVE + STRONGER GLOW BORDER) ================= */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1 }}
             className="flex justify-center"
           >
-            <div className="relative max-w-md rounded-xl">
+            <div className="relative max-w-md rounded-[20%] p-[2px] 
+              bg-gradient-to-tr from-cyan-400/50 to-transparent
+              shadow-[0_0_70px_rgba(0,255,255,0.35)]
+              hover:shadow-[0_0_100px_rgba(0,255,255,0.55)]
+              transition-all duration-500">
               <img
                 src={Photo}
                 alt="Profile"
-                className="rounded-xl w-full shadow-[0_25px_70px_rgba(0,0,0,0.6)]"
+                className="rounded-[20%] w-full bg-portfolio-bg-main"
               />
-              {/* subtle light overlay */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-cyan-400/15 to-transparent pointer-events-none" />
             </div>
           </motion.div>
 

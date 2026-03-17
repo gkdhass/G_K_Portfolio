@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Code2, Rocket, Users } from 'lucide-react'
-import Photo from '../assets/profile.jpg'
-import CV from '../assets/Mohandhass.pdf'
+import Photo from '../assets/profile.jpeg'
+import CV from '../assets/Mohan Dhass G_VSBEC.pdf'
 
 const About = () => {
   const ref = useRef(null)

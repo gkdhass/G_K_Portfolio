@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { FaXTwitter } from 'react-icons/fa6'
-import Profile from '../assets/profile.jpg'
+import Profile from '../assets/profile.jpeg'
 
 const Hero = () => {
   /* ================= CONTACT SCROLL ================= */

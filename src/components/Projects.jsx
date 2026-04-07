@@ -40,7 +40,7 @@ const Projects = () => {
       image:
         'https://martech.org/wp-content/uploads/2017/09/spotify-logo-1920x1080.jpg',
       technologies: ['React', 'Node.js', 'Express.js', 'Mongo_DB'],
-      liveUrl: 'https://spotify-ebon-six.vercel.app',
+      liveUrl: 'https://mohanmusic.vercel.app/',
       githubUrl: 'https://github.com/gkdhass/Spotify-clone.git',
     },
     {

@@ -30,8 +30,8 @@ const Projects = () => {
         'Chart.js',
         'JWT Authentication',
       ],
-      githubUrl: 'https://github.com/gkdhass/EventHub.git',
-      liveUrl: 'https://spotify-ebon-six.vercel.app/',
+      githubUrl: 'https://github.com/gkdhass/Event-Hub.git',
+      liveUrl: 'https://gkeventhub.vercel.app/',
     },
     {
       title: 'Spotify Clone',

@@ -31,7 +31,7 @@ const Projects = () => {
         'JWT Authentication',
       ],
       githubUrl: 'https://github.com/gkdhass/Event-Hub.git',
-      liveUrl: 'https://gkeventhub.vercel.app/',
+      liveUrl: 'https://gkeventhub.vercel.app',
     },
     {
       title: 'Spotify Clone',
@@ -40,7 +40,7 @@ const Projects = () => {
       image:
         'https://martech.org/wp-content/uploads/2017/09/spotify-logo-1920x1080.jpg',
       technologies: ['React', 'Node.js', 'Express.js', 'Mongo_DB'],
-      liveUrl: 'https://spotify-ebon-six.vercel.app/',
+      liveUrl: 'https://spotify-ebon-six.vercel.app',
       githubUrl: 'https://github.com/gkdhass/Spotify-clone.git',
     },
     {
@@ -50,8 +50,8 @@ const Projects = () => {
       image:
         'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
       technologies: ['React', 'Tailwind CSS', 'Framer Motion'],
-      liveUrl: '#',
-      githubUrl: '#',
+      liveUrl: 'https://mohandhass.vercel.app/',
+      githubUrl: 'https://github.com/gkdhass/G_K_Portfolio.git',
     },
     {
       title: 'Car Expo',

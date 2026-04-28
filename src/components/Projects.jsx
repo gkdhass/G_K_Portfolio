@@ -14,9 +14,9 @@ const Projects = () => {
         'A full-featured online shopping platform with payment integration, user authentication, and admin dashboard.',
       image:
         'https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      liveUrl: '#',
-      githubUrl: '#',
+      technologies: ['React', 'Node.js', 'MongoDB', 'Express.js'],
+      liveUrl: 'https://kmcart.vercel.app/',
+      githubUrl: 'https://github.com/gkdhass/KM-Cart.git',
     },
     {
       title: 'Campus EventHub',

@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Code2, Rocket, Users } from 'lucide-react'
 import Photo from '../assets/profile.jpeg'
-import CV from '../assets/Mohan Dhass G_VSBEC.pdf'
+import CV from '../assets/Mohan_Dhass_VSBEC.pdf'
 
 const About = () => {
   const ref = useRef(null)
